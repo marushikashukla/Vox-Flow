@@ -1,2 +1,3 @@
-# Vox-Flow
-Your Voice-Powered Knowledge OS.
+# Welcome to your Lovable project
+
+TODO: Document your project here
