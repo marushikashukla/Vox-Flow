@@ -1,0 +1,152 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --radius: 0.625rem;
+
+    --background: 230 60% 6%;
+    --foreground: 210 20% 90%;
+
+    --card: 230 40% 10%;
+    --card-foreground: 210 20% 90%;
+
+    --popover: 230 40% 10%;
+    --popover-foreground: 210 20% 90%;
+
+    --primary: 185 100% 50%;
+    --primary-foreground: 230 60% 6%;
+
+    --secondary: 265 80% 55%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 230 30% 15%;
+    --muted-foreground: 220 15% 55%;
+
+    --accent: 265 80% 55%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 230 25% 18%;
+    --input: 230 25% 18%;
+    --ring: 185 100% 50%;
+
+    /* VoxFlow custom tokens */
+    --cyan: 185 100% 50%;
+    --cyan-dim: 185 60% 35%;
+    --cyan-glow: 185 100% 50%;
+    --purple-accent: 265 80% 55%;
+    --purple-dim: 265 50% 30%;
+    --surface: 230 45% 9%;
+    --surface-raised: 230 35% 13%;
+    --success: 145 70% 50%;
+
+    --sidebar-background: 230 50% 7%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 185 100% 50%;
+    --sidebar-primary-foreground: 230 60% 6%;
+    --sidebar-accent: 230 30% 15%;
+    --sidebar-accent-foreground: 210 20% 90%;
+    --sidebar-border: 230 25% 18%;
+    --sidebar-ring: 185 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+@layer utilities {
+  .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  .font-sans {
+    font-family: 'Inter', ui-sans-serif, sans-serif;
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--surface-raised)) transparent;
+  }
+  .glow-cyan {
+    box-shadow: 0 0 20px hsl(var(--cyan) / 0.4), 0 0 60px hsl(var(--cyan) / 0.1);
+  }
+  .glow-purple {
+    box-shadow: 0 0 20px hsl(var(--purple-accent) / 0.4), 0 0 60px hsl(var(--purple-accent) / 0.1);
+  }
+  .glass {
+    @apply backdrop-blur-xl border;
+    background: hsl(var(--surface) / 0.5);
+    border-color: hsl(var(--cyan) / 0.15);
+  }
+  .glass-card {
+    @apply backdrop-blur-xl border rounded-lg transition-all duration-300;
+    background: hsl(var(--surface-raised) / 0.5);
+    border-color: hsl(var(--cyan) / 0.2);
+  }
+  .glass-card:hover {
+    border-color: hsl(var(--purple-accent) / 0.4);
+    box-shadow: 0 0 25px hsl(var(--cyan) / 0.15);
+    transform: translateY(-2px);
+  }
+}
+
+/* Animations */
+@keyframes mic-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 hsl(var(--cyan) / 0.4), 0 0 20px hsl(var(--cyan) / 0.3); }
+  50% { box-shadow: 0 0 0 14px hsl(var(--cyan) / 0), 0 0 40px hsl(var(--cyan) / 0.4); }
+}
+@keyframes mic-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes float-particle {
+  0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) translateX(50px); opacity: 0; }
+}
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes typewriter-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+@keyframes pulse-live {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@layer utilities {
+  .animate-mic-pulse { animation: mic-pulse 2s ease-in-out infinite; }
+  .animate-mic-spin { animation: mic-spin 1s linear infinite; }
+  .animate-ticker { animation: ticker-scroll 30s linear infinite; }
+  .animate-pulse-live { animation: pulse-live 1.5s ease-in-out infinite; }
+}
+
+/* Grid overlay */
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(hsl(var(--cyan) / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--cyan) / 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
